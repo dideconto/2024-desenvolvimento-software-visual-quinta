@@ -1,5 +1,8 @@
 ### Requisição para a raiz da API
 GET http://localhost:5117
 
-### Requisição para a segunda funcionalidade da API
-GET http://localhost:5117/segundafuncionalidade
+### Listar Produtos
+GET http://localhost:5117/produto/listar
+
+### Cadastrar Produto
+POST http://localhost:5117/produto/cadastrar/agua
