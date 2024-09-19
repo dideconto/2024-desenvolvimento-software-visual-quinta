@@ -4,5 +4,15 @@ GET http://localhost:5117
 ### Listar Produtos
 GET http://localhost:5117/produto/listar
 
+### Buscar Produto
+GET http://localhost:5117/produto/buscar/bolacha
+
 ### Cadastrar Produto
-POST http://localhost:5117/produto/cadastrar/agua
+POST http://localhost:5117/produto/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Bolacha",
+    "preco" : 4.5,
+    "quantidade" : 159
+}

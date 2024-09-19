@@ -5,13 +5,14 @@
 //Minimal APIs
 
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 //Lista de produtos
-List<Produto> produtos = new List<Produto>
-{
+List<Produto> produtos =
+[
     new Produto { Nome = "Camiseta", Preco = 29.99, Quantidade = 100 },
     new Produto { Nome = "Calça Jeans", Preco = 89.99, Quantidade = 50 },
     new Produto { Nome = "Tênis Esportivo", Preco = 199.99, Quantidade = 30 },
@@ -22,36 +23,45 @@ List<Produto> produtos = new List<Produto>
     new Produto { Nome = "Relógio", Preco = 149.99, Quantidade = 10 },
     new Produto { Nome = "Camisa Social", Preco = 39.99, Quantidade = 60 },
     new Produto { Nome = "Tênis Casual", Preco = 129.99, Quantidade = 25 }
-};
+];
 
 //Endpoints - Funcionalidade
 //Request/Requisição - URL e o método/verbo HTTP
+//Response/Resposta - Dados (json ou xml) e códigos de status HTTP
 app.MapGet("/", () => "API de Produtos!");
 
 //GET: http://localhost:5117/produto/listar
 app.MapGet("/produto/listar", () =>
 {
-    return produtos;
+    if (produtos.Count > 0)
+    {
+        return Results.Ok(produtos);
+    }
+    return Results.NotFound();
+});
+
+//GET: http://localhost:5117/produto/buscar/agua
+app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
+{
+    foreach (Produto produtoCadastrado in produtos)
+    {
+        if (produtoCadastrado.Nome == nome)
+        {
+            return Results.Ok(produtoCadastrado);
+        }
+    }
+    return Results.NotFound();
 });
 
 //POST: http://localhost:5117/produto/cadastrar
-app.MapPost("/produto/cadastrar/{nome}", (string nome) =>
+app.MapPost("/produto/cadastrar", ([FromBody] Produto produto) =>
 {
-    Produto produto = new Produto();
-    produto.Nome = nome;
     produtos.Add(produto);
-    return produtos;
+    return Results.Created("", produto);
 });
 
-//Criar novas funcionalidades/Endpoints para receber dados
-// - Corpo da requisição
-// - Estudar e entender qual é o código HTTP adequado 
-//para um cadastro
+//Implementar todas as funcionalidades do CRUD
+// - Remover produto
+// - Alterar produto
 
 app.Run();
-
-// Produto produto = new Produto();
-// produto.Preco = 789456;
-// produto.setPreco(8800);
-// Console.WriteLine("Preço: " + produto.Preco);
-// Console.WriteLine("Preço: " + produto.getPreco());
