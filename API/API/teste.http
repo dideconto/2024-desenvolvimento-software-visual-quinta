@@ -1,18 +1,31 @@
-### Requisição para a raiz da API
+### Requisação para a raiz da aplicação
 GET http://localhost:5117
 
-### Listar Produtos
-GET http://localhost:5117/produto/listar
+### Listar produtos
+GET http://localhost:5117/api/produto/listar
 
-### Buscar Produto
-GET http://localhost:5117/produto/buscar/bolacha
+### Buscar produto
+GET http://localhost:5117/api/produto/buscar/fc05e072-842a-460a-9e44-1573b87fa95
 
-### Cadastrar Produto
-POST http://localhost:5117/produto/cadastrar
+### Cadastrar produto
+POST http://localhost:5117/api/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Bolacha",
-    "preco" : 4.5,
-    "quantidade" : 159
+    "nome" : "Água",
+    "valor" : 4.5,
+    "quantidade" : 153
+}
+
+### Deletar produto
+DELETE http://localhost:5117/api/produto/deletar/a33a2763-c526-43ce-a901-37fb7f2ef14b
+
+### Alterar produto
+PUT http://localhost:5117/api/produto/alterar/ab73d311-35dc-42cc-a5d2-140279ff08ac
+Content-Type: application/json
+
+{
+    "nome" : "Água",
+    "valor" : 4.5,
+    "quantidade" : 153
 }
