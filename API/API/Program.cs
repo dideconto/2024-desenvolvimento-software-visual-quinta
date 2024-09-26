@@ -43,6 +43,7 @@ app.MapGet("/api/produto/listar", () =>
 //GET: /api/produto/buscar/{id}
 app.MapGet("/api/produto/buscar/{id}", ([FromRoute] string id) =>
 {
+    //Expressão lambda em c#
     Produto? produto = produtos.Find(x => x.Id == id);
     if (produto == null)
     {
@@ -51,7 +52,7 @@ app.MapGet("/api/produto/buscar/{id}", ([FromRoute] string id) =>
     return Results.Ok(produto);
 });
 
-//POST: /api/produto/cadastrar/param_nome
+//POST: /api/produto/cadastrar
 app.MapPost("/api/produto/cadastrar", ([FromBody] Produto produto) =>
 {
     produtos.Add(produto);
@@ -71,7 +72,8 @@ app.MapDelete("/api/produto/deletar/{id}", ([FromRoute] string id) =>
 });
 
 //PUT: /api/produto/alterar/{id}
-app.MapPut("/api/produto/alterar/{id}", ([FromRoute] string id, [FromBody] Produto produtoAlterado) =>
+app.MapPut("/api/produto/alterar/{id}", ([FromRoute] string id,
+    [FromBody] Produto produtoAlterado) =>
 {
     Produto? produto = produtos.Find(x => x.Id == id);
     if (produto == null)

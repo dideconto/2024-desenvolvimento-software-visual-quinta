@@ -5,7 +5,7 @@ GET http://localhost:5117
 GET http://localhost:5117/api/produto/listar
 
 ### Buscar produto
-GET http://localhost:5117/api/produto/buscar/fc05e072-842a-460a-9e44-1573b87fa95
+GET http://localhost:5117/api/produto/buscar/28c29fbe-599d-4723-bf73-e783b2911efc
 
 ### Cadastrar produto
 POST http://localhost:5117/api/produto/cadastrar
@@ -18,14 +18,14 @@ Content-Type: application/json
 }
 
 ### Deletar produto
-DELETE http://localhost:5117/api/produto/deletar/a33a2763-c526-43ce-a901-37fb7f2ef14b
+DELETE http://localhost:5117/api/produto/deletar/28c29fbe-599d-4723-bf73-e783b2911efc
 
 ### Alterar produto
-PUT http://localhost:5117/api/produto/alterar/ab73d311-35dc-42cc-a5d2-140279ff08ac
+PUT http://localhost:5117/api/produto/alterar/e6f1115d-d1b0-49ac-b245-2103f59cd190
 Content-Type: application/json
 
 {
     "nome" : "Água",
-    "valor" : 4.5,
+    "preco" : 4.5,
     "quantidade" : 153
 }
