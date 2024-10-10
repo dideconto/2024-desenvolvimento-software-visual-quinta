@@ -5,16 +5,17 @@ GET http://localhost:5117
 GET http://localhost:5117/api/produto/listar
 
 ### Buscar produto
-GET http://localhost:5117/api/produto/buscar/28c29fbe-599d-4723-bf73-e783b2911efc
+GET http://localhost:5117/api/produto/buscar/deaa13e5-4d58-44bc-98c6-576f95893d18
 
 ### Cadastrar produto
 POST http://localhost:5117/api/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Água",
-    "valor" : 4.5,
-    "quantidade" : 153
+    "nome" : "Coca",
+    "preco" : 4.5,
+    "quantidade" : 153,
+    "descricao" : "Alimento"
 }
 
 ### Deletar produto

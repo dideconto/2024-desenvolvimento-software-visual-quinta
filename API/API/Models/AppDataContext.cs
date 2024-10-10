@@ -7,6 +7,7 @@ public class AppDataContext : DbContext
 {
     //Declarar todas as classes de modelo que vão virar tabelas no banco de dados
     public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
 
     //Qual o banco de dados que será utilizado
     //String de conexão
