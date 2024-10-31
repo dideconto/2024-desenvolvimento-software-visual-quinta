@@ -4,7 +4,7 @@ import ConsultarCEP from './ConsultarCEP';
 
 function App() {
   return (
-    <div>
+    <div id="app">
       <ConsultarCEP/>
     </div>
   );
