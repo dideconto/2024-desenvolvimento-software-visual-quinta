@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function ConsultarCEP(){
 
+    //Estados
     const [bairro, setBairro] = useState("");
     const [localidade, setLocalidade] = useState("");
     const [logradouro, setLogradouro] = useState("");
@@ -55,9 +56,3 @@ function ConsultarCEP(){
 }
 
 export default ConsultarCEP;
-
-//EXERCÍCIOS
-//1 - Exibir os dados do CEP no HTML
-//2 - Realizar a requisição para a sua API
-//3 - Resolver o problema de CORS na API
-//4 - Exibir a lista de produtos no HTML
