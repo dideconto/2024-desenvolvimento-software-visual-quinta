@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 import { Produto } from "../../../models/Produto";
 
@@ -7,6 +7,18 @@ function CadastrarProduto() {
   const [descricao, setDescricao] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+  const [categoriaId, setCategoriaId] = useState(0);
+  //Criar a interface de categoria e realizar a tipagem
+  const [categorias, setCategorias] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5117/api/categoria/listar")
+      .then((resposta) => resposta.json())
+      .then((categorias) => {
+        setCategorias(categorias);
+        console.table(categorias);
+      });
+  }, []);
 
   function enviarProduto(e: any) {
     const produto: Produto = {
@@ -14,6 +26,7 @@ function CadastrarProduto() {
       descricao: descricao,
       preco: Number(preco),
       quantidade: Number(quantidade),
+      categoriaId: categoriaId,
     };
 
     //AXIOS - Biblioteca para requisições HTTP - Recomendação
@@ -82,6 +95,20 @@ function CadastrarProduto() {
             step="0.01"
             placeholder="Digite o preço do produto"
           />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="categorias">Categorias</label>
+          <select
+            id="categoria"
+            onChange={(e: any) => setCategoriaId(e.target.value)}
+          >
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.nome}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-actions">

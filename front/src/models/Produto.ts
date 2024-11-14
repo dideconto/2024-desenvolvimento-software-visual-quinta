@@ -5,4 +5,5 @@ export interface Produto{
     quantidade : number;
     preco : number;
     criadoEm? : string;
+    categoriaId : number;
 }

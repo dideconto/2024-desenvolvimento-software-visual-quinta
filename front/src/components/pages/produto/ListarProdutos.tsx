@@ -7,7 +7,7 @@ function ListarProdutos() {
 
   useEffect(() => {
     consultarProdutos();
-  });
+  }, []);
 
   function consultarProdutos() {
     fetch("http://localhost:5117/api/produto/listar")
@@ -31,7 +31,7 @@ function ListarProdutos() {
         </thead>
         <tbody>
           {produtos.map((produto) => (
-            <tr>
+            <tr key={produto.id}>
               <td>{produto.id}</td>
               <td>{produto.nome}</td>
               <td>{produto.criadoEm}</td>
