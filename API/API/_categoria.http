@@ -1,0 +1,10 @@
+### Listar categorias
+GET http://localhost:5117/api/categoria/listar
+
+### Cadastrar categoria
+POST http://localhost:5117/api/categoria/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Alimentos"
+}

@@ -19,7 +19,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Categoria", b =>
                 {
-                    b.Property<int>("CategoriaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -29,7 +29,7 @@ namespace API.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categorias");
                 });
@@ -38,6 +38,9 @@ namespace API.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("TEXT");
@@ -56,7 +59,20 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Produtos");
+                });
+
+            modelBuilder.Entity("API.Models.Produto", b =>
+                {
+                    b.HasOne("API.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 #pragma warning restore 612, 618
         }

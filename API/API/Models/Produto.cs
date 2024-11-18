@@ -15,6 +15,7 @@ public class Produto
     public double Preco { get; set; }
     public int Quantidade { get; set; }
     public DateTime CriadoEm { get; set; }
-
+    public Categoria Categoria { get; set; }
+    public int CategoriaId { get; set; }
 
 }

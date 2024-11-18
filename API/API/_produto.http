@@ -15,7 +15,8 @@ Content-Type: application/json
     "nome" : "Coca",
     "preco" : 4.5,
     "quantidade" : 153,
-    "descricao" : "Alimento"
+    "descricao" : "Alimento",
+    "categoriaId" : 2
 }
 
 ### Deletar produto

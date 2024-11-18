@@ -6,6 +6,7 @@
 
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
@@ -39,13 +40,33 @@ List<Produto> produtos =
 //Response/Resposta - Dados (json ou xml) e códigos de status HTTP
 app.MapGet("/", () => "API de Produtos");
 
+//GET: /api/categoria/listar
+app.MapGet("/api/categoria/listar", ([FromServices] AppDataContext ctx) =>
+{
+    // if (ctx.Produtos.Count() > 0)
+    if (ctx.Categorias.Any())
+    {
+        return Results.Ok(ctx.Categorias.ToList());
+    }
+    return Results.NotFound();
+});
+
+//POST: /api/categoria/cadastrar
+app.MapPost("/api/categoria/cadastrar", ([FromBody] Categoria categoria,
+    [FromServices] AppDataContext ctx) =>
+{
+    ctx.Categorias.Add(categoria);
+    ctx.SaveChanges();
+    return Results.Created("", categoria);
+});
+
 //GET: /api/produto/listar
 app.MapGet("/api/produto/listar", ([FromServices] AppDataContext ctx) =>
 {
     // if (ctx.Produtos.Count() > 0)
     if (ctx.Produtos.Any())
     {
-        return Results.Ok(ctx.Produtos.ToList());
+        return Results.Ok(ctx.Produtos.Include(x => x.Categoria).ToList());
     }
     return Results.NotFound();
 });
@@ -69,6 +90,12 @@ app.MapGet("/api/produto/buscar/{id}", ([FromRoute] string id,
 app.MapPost("/api/produto/cadastrar", ([FromBody] Produto produto,
     [FromServices] AppDataContext ctx) =>
 {
+    Categoria? categoria = ctx.Categorias.Find(produto.CategoriaId);
+    if (categoria is null)
+    {
+        return Results.NotFound();
+    }
+    produto.Categoria = categoria;
     ctx.Produtos.Add(produto);
     ctx.SaveChanges();
     return Results.Created("", produto);
