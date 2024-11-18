@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Produto } from "../../../models/Produto";
-import "./styles.css";
+import styles from "./ProdutoLista.module.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ListarProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -18,15 +20,25 @@ function ListarProdutos() {
       });
   }
 
+  function deletar(id: string) {
+    axios
+      .delete(`http://localhost:5020/api/produto/deletar/${id}`)
+      .then((resposta) => {
+        console.log(resposta.data);
+      });
+  }
+
   return (
-    <div id="listarprodutos">
+    <div id="listarprodutos" className="container">
       <h1>Listar Produtos</h1>
-      <table>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>#</th>
             <th>Nome</th>
             <th>Criado em</th>
+            <th>Deletar</th>
+            <th>Alterar</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +47,16 @@ function ListarProdutos() {
               <td>{produto.id}</td>
               <td>{produto.nome}</td>
               <td>{produto.criadoEm}</td>
+              <td>
+                <button onClick={() => deletar(produto.id!)}>
+                  Deletar
+                </button>
+              </td>
+              <td>
+                <Link to={`/pages/produto/alterar/${produto.id}`}>
+                  Alterar
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

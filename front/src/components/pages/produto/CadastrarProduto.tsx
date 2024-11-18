@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./styles.css";
 import { Produto } from "../../../models/Produto";
+import styles from "./CadastrarProduto.module.css";
 
 function CadastrarProduto() {
   const [nome, setNome] = useState("");
@@ -46,10 +46,10 @@ function CadastrarProduto() {
   }
 
   return (
-    <div id="cadastro-produto">
-      <h1>Cadastrar Produto</h1>
-      <form onSubmit={enviarProduto} id="formProduto">
-        <div className="form-group">
+    <div id="cadastro-produto" className={styles["cadastro-produto"]}>
+      <h1 className={styles.h1}>Cadastrar Produto</h1>
+      <form onSubmit={enviarProduto} className={styles.form}>
+        <div className={styles["form-group"]}>
           <label htmlFor="nome">Nome</label>
           <input
             onChange={(e: any) => setNome(e.target.value)}
@@ -61,7 +61,7 @@ function CadastrarProduto() {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="descricao">Descrição</label>
           <textarea
             onChange={(e: any) => setDescricao(e.target.value)}
@@ -72,7 +72,7 @@ function CadastrarProduto() {
           ></textarea>
         </div>
 
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="quantidade">Quantidade</label>
           <input
             onChange={(e: any) => setQuantidade(e.target.value)}
@@ -84,7 +84,7 @@ function CadastrarProduto() {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="preco">Preço</label>
           <input
             onChange={(e: any) => setPreco(e.target.value)}
@@ -97,7 +97,7 @@ function CadastrarProduto() {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="categorias">Categorias</label>
           <select
             id="categoria"
@@ -111,7 +111,7 @@ function CadastrarProduto() {
           </select>
         </div>
 
-        <div className="form-actions">
+        <div className={styles["form-actions"]}>
           <button type="submit">Cadastrar Produto</button>
         </div>
       </form>
